@@ -1,0 +1,5 @@
+<div class="container">
+    <h2>Correct!</h2>
+    <p>Well done! Your answer is correct.</p>
+    <a href="/quiz/<%= it.topicId %>">Next question</a>
+</div>

@@ -1,0 +1,6 @@
+<div class="container">
+    <h2>Incorrect!</h2>
+    <p>Sorry, that's not the right answer. The correct option was: <%= it.correctOptionText %></p>
+    <a href="/quiz/<%= it.topicId %>">Next question</a>
+</div>
+

@@ -1,1 +1,25 @@
-<%~ it.body %>
+<!doctype html>
+<html lang="en">
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/topics">Topics</a></li>
+        <li><a href="/quiz">Quiz</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Register</a></li>
+    </ul>
+</nav>
+
+  <head>
+    <title>Quiz app</title>
+    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div class="container paper">
+      <%~ it.content %>
+    </div>
+  </body>
+</html>

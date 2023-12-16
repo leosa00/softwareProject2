@@ -1,0 +1,8 @@
+<h1>Register form</h1>
+
+
+<form action="/auth/register" method="post">
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Register</button>
+</form>

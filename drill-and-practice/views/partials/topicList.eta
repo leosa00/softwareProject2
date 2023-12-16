@@ -1,0 +1,8 @@
+<% layout("./layouts/layout.eta") %>
+
+<h2>Available Topics</h2>
+<ul>
+    <% for (const topic of it.topics) { %>
+        <li><a href="/topics/<%= topic.id %>"><%= topic.name %></a></li>
+    <% } %>
+</ul>

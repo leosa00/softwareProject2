@@ -1,0 +1,20 @@
+<% if (it.user.admin) { %>
+    <form action="/topics" method="post">
+        <input type="text" name="name" placeholder="Topic name" required>
+        <button type="submit">Add Topic</button>
+    </form>
+<% } %>
+
+<h2>Topics</h2>
+<ul>
+    <% it.topics.forEach(topic => { %>
+        <li>
+            <a href="/topics/<%= topic.id %>"><%= topic.name %></a>
+            <% if (it.user && it.user.admin) { %>
+                <form action="/topics/<%= topic.id %>/delete" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            <% } %>
+        </li>
+    <% }) %>
+</ul>

@@ -2,7 +2,8 @@
     <h2><%= it.question.question_text %></h2>
     <% it.options.forEach(option => { %>
         <form action="/quiz/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options/<%= option.id %>" method="post">
-            <button type="submit"><%= option.option_text %></button>
+            <p><%= option.option_text %></p>
+            <button type="submit">Choose</button>
         </form>
     <% }) %>
 </div>

@@ -1,3 +1,13 @@
+<% if (it.validationErrors) { %>
+    <% for (const [field, messages] of Object.entries(it.validationErrors)) { %>
+        <% if (Array.isArray(messages)) { %>
+            <p class="error"><%= field %>: <%= messages.join(', ') %></p>
+        <% } else { %>
+            <p class="error"><%= field %>: <%= messages %></p>
+        <% } %>
+    <% } %>
+<% } %>
+
 <div class="container">
     <h2><%= it.topic.name %></h2>
 

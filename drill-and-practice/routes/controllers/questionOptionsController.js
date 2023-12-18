@@ -1,5 +1,5 @@
 
-import * as questionOptionService from '/drill-and-practice/services/questionOptionService.js';
+import * as questionOptionService from '../../services/questionOptionService.js';
 
 const addAnswerOption = async ({ request, params, response }) => {
     const { value } = await request.body();

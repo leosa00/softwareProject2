@@ -1,16 +1,17 @@
-import * as topicService from '/drill-and-practice/services/topicService.js';
-import * as questionService from '/drill-and-practice/services/questionService.js';
-import * as questionOptionService from '/drill-and-practice/services/questionOptionService.js';
+import * as topicService from '../../services/topicService.js';
+import * as questionService from '../../services/questionService.js';
+import * as questionOptionService from '../../services/questionOptionService.js';
+import * as answerService from '../../services/answerService.js';
 
 const showQuizTopics = async ({ render }) => {
     const topics = await topicService.findAllTopics();
     await render('quizTopics.eta', { topics });
 };
 
-const showRandomQuestion = async ({ params, response }) => {
+const showRandomQuestion = async ({ params, response, render }) => {
     const questions = await questionService.findQuestionsForTopic(params.tId);
     if (questions.length === 0) {
-        // Redirect to a "No questions" page or render a message
+        await render('noQuestions.eta', { topicId: params.tId });
         return;
     }
     const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
@@ -23,21 +24,22 @@ const showQuestion = async ({ params, render }) => {
     await render('quizQuestion.eta', { question, options });
 };
 
-const processAnswer = async ({ params, response }) => {
+const processAnswer = async ({ params, response, user }) => {
     const selectedOptionId = params.oId;
     const selectedOption = await questionOptionService.findOptionById(selectedOptionId);
 
     if (!selectedOption) {
-        // Handle the case where the option does not exist
-        response.status = 404; // Not Found
+        response.status = 404;
         return;
     }
 
+    if (user) {
+        await answerService.addUserAnswer(user.id, params.qId, selectedOptionId);
+    }
+
     if (selectedOption.is_correct) {
-        // Redirect to the "Correct" page
         response.redirect(`/quiz/${params.tId}/questions/${params.qId}/correct`);
     } else {
-        // Redirect to the "Incorrect" page
         response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect`);
     }
 };

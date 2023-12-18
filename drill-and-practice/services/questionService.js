@@ -15,7 +15,7 @@ const createQuestion = async (userId, topicId, questionText) => {
 
 const countQuestions = async () => {
     const result = await sql`SELECT COUNT(*) FROM questions`;
-    return result.count;
+    return Number(result[0].count);
 };
 
 
@@ -32,4 +32,11 @@ const deleteQuestion = async (questionId) => {
 };
 
 
-export { findQuestionsForTopic, createQuestion, countQuestions, findQuestionById, deleteQuestion };
+const findAllQuestions = async () => {
+    const result = await sql`SELECT * FROM questions`;
+    return result;
+};
+
+
+
+export { findQuestionsForTopic, createQuestion, countQuestions, findQuestionById, deleteQuestion, findAllQuestions};

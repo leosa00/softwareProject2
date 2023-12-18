@@ -1,6 +1,6 @@
 import { renderFile } from 'https://deno.land/x/eta@v2.2.0/mod.ts';
-import * as questionService from '/drill-and-practice/services/questionService.js';
-import * as questionOptionService from '/drill-and-practice/services/questionOptionService.js';
+import * as questionService from '../../services/questionService.js';
+import * as questionOptionService from '../../services/questionOptionService.js';
 
 
 const showQuestionDetails = async ({ params, render }) => {
@@ -18,12 +18,9 @@ const addAnswerOption = async ({ request, params, response }) => {
     const optionText = formValues.get('option_text');
     const isCorrect = formValues.has('is_correct');
 
-    try {
-        await questionOptionService.addAnswerOption(params.qId, optionText, isCorrect);
-        response.redirect(`/topics/${params.id}/questions/${params.qId}`);
-    } catch (error) {
-       //handle validation errors
-    }
+    
+    await questionOptionService.addAnswerOption(params.qId, optionText, isCorrect);
+    response.redirect(`/topics/${params.id}/questions/${params.qId}`);
 };
 const listQuestionsForTopic = async ({ params, response }) => {
     const questions = await questionService.findQuestionsForTopic(params.topicId);

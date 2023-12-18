@@ -1,8 +1,15 @@
-<h1>Register form</h1>
+<h1>Registration form</h1>
 
+<% if (it.validationErrors) { %>
+    <% for (const [field, errorObj] of Object.entries(it.validationErrors)) { %>
+        <% for (const [rule, message] of Object.entries(errorObj)) { %>
+            <p class="error"><%= field %> (<%= rule %>): <%= message %></p>
+        <% } %>
+    <% } %>
+<% } %>
 
 <form action="/auth/register" method="post">
-    <input type="email" name="email" placeholder="Email" required>
+    <input type="email" name="email" placeholder="Email" value="<%= it.userData ? it.userData.email : '' %>" required>
     <input type="password" name="password" placeholder="Password" required>
     <button type="submit">Register</button>
 </form>

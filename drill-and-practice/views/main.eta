@@ -1,10 +1,7 @@
 
 
 <div class="container">
-    <h1>Welcome to the Quiz Practice Application</h1>
-    <p>Engage in learning with our comprehensive practice quizzes!</p>
-
-    <!-- Display application statistics if available -->
+    <h1>Welcome to the Quiz Application</h1>
     <% if (it.stats) { %>
         <div>
             <h2>Application Statistics:</h2>

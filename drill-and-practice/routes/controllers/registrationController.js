@@ -1,13 +1,31 @@
 import { bcrypt } from "../../deps.js";
 import * as userService from "../../services/userService.js";
+import { validasaur } from "../../deps.js";
 
-const registerUser = async ({ request, response }) => {
+const registrationValidationRules = {
+  email: [validasaur.required, validasaur.isEmail],
+  password: [validasaur.required, validasaur.minLength(4)]
+};
+
+const registerUser = async ({ request, response, render }) => {
   const body = request.body({ type: "form" });
   const params = await body.value;
 
+  const userData = {
+    email: params.get("email"),
+    password: params.get("password"),
+  };
+
+  const [passes, errors] = await validasaur.validate(userData, registrationValidationRules);
+
+  if (!passes) {
+    render("register.eta", { validationErrors: errors, userData });
+    return;
+  }
+
   await userService.addUser(
-    params.get("email"),
-    await bcrypt.hash(params.get("password")),
+    userData.email,
+    await bcrypt.hash(userData.password)
   );
 
   response.redirect("/auth/login");

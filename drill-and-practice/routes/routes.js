@@ -4,10 +4,9 @@ import * as topicController from "./controllers/topicController.js";
 import * as registrationController from "./controllers/registrationController.js"
 import * as loginController from "./controllers/loginController.js"
 import * as questionsController from "./controllers/questionsController.js";
-import * as questionOptionsController from "./controllers/questionOptionsController.js";
-import * as authController from "./controllers/loginController.js";
 import * as quizController from "./controllers/quizController.js";
 import * as quizFeedbackController from './controllers/quizFeedbackController.js';
+import * as apiController from './apis/apiController.js';
 
 const router = new Router();
 
@@ -42,6 +41,9 @@ router.post('/quiz/:tId/questions/:qId/options/:oId', quizController.processAnsw
 
 router.get('/quiz/:tId/questions/:qId/correct', quizFeedbackController.showCorrectAnswerPage);
 router.get('/quiz/:tId/questions/:qId/incorrect', quizFeedbackController.showIncorrectAnswerPage);
+
+router.get('/api/questions/random', apiController.getRandomQuestion);
+router.post('/api/questions/answer', apiController.checkAnswer);
 
 
 export { router };

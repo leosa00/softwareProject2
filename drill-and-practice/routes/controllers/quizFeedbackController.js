@@ -1,4 +1,4 @@
-import * as questionOptionService from '/drill-and-practice/services/questionOptionService.js';
+import * as questionOptionService from '../../services/questionOptionService.js';
 
 const showCorrectAnswerPage = async ({ params, render }) => {
     await render('correct.eta', { topicId: params.tId });
